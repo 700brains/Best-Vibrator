@@ -1,0 +1,252 @@
+BestVibratorAppMain:
+
+<BestVibratorAppMain>:
+	padding: "-2dp"
+	orientation: "vertical"
+	canvas.before:
+		Rectangle:
+			size: self.size
+			pos: self.pos
+			source: "atlas://images/BestVibratorAppAtlas.atlas/background"
+	BestVibratorAppMainView:
+	BestVibratorAppBottomBar:
+	
+<BestVibratorAppBottomBar>:
+	size_hint: 1, None
+	height: "50dp"
+	padding: "0dp"
+	orientation: "horizontal"
+	spacing: "0dp"
+	BestVibratorButton:
+		text: "STOP VIBRATIONS"
+		size_hint: 1, None
+		height: "50dp"
+		on_release: app.vibratorController.stop_vibrator(), app.adsController.show_ads()
+	BestVibratorButton:
+		text: "EXIT"
+		size_hint: 1, None
+		height: "50dp"
+		on_release: if not app.adsController.show_ads(): app.close_app()
+
+<BestVibratorAppMainView>:
+	tab_pos: "top_left"
+	do_default_tab: False
+	tab_height: "50dp"
+	tab_width: root.width/4
+	background_image: "atlas://images/BestVibratorAppAtlas.atlas/alpha"
+	TabbedPanelItem:
+		font_size: "12dp"
+		background_normal: "atlas://images/BestVibratorAppAtlas.atlas/button_normal"
+		background_down: "atlas://images/BestVibratorAppAtlas.atlas/button_down"
+		text: "TIME"
+		font_name: "fonts/Roboto-Medium.ttf"
+		BestVibratorAppTimeView:
+	TabbedPanelItem:
+		font_size: "12dp"
+		background_normal: "atlas://images/BestVibratorAppAtlas.atlas/button_normal"
+		background_down: "atlas://images/BestVibratorAppAtlas.atlas/button_down"
+		text: "CUSTOM"
+		font_name: "fonts/Roboto-Medium.ttf"
+		BestVibratorAppCustomTimeView:
+	TabbedPanelItem:
+		font_size: "12dp"
+		background_normal: "atlas://images/BestVibratorAppAtlas.atlas/button_normal"
+		background_down: "atlas://images/BestVibratorAppAtlas.atlas/button_down"
+		text: "PATTERN"
+		font_name: "fonts/Roboto-Medium.ttf"
+		BestVibratorAppSchemaView:
+	TabbedPanelItem:
+		font_size: "12dp"
+		background_normal: "atlas://images/BestVibratorAppAtlas.atlas/button_normal"
+		background_down: "atlas://images/BestVibratorAppAtlas.atlas/button_down"
+		text: "ABOUT"
+		font_name: "fonts/Roboto-Medium.ttf"
+		BestVibratorAppAboutView:
+		
+		
+<BestVibratorAppTimeView>:
+	orientation: "vertical"
+	spacing: "5dp"
+	padding: "5dp"
+	BestVibratorLabel:
+		text: "Choose one of the predefined vibration modes."
+		color: 0,0,0,0.54
+		halign: "center"
+		font_size: "16dp"
+		size_hint: 1, 1
+		height: self.texture_size[1]
+		text_size: self.width, None
+		font_name: "fonts/Roboto-Regular.ttf"
+	BestVibratorButton:
+		text: "1 SECOND"
+		size_hint: 1, None
+		height: "50dp"
+		on_release: app.vibratorController.run_vibrator(1), app.adsController.show_ads()
+	BestVibratorButton:
+		text: "2 SECONDS"
+		size_hint: 1, None
+		height: "50dp"
+		on_release: app.vibratorController.run_vibrator(2), app.adsController.show_ads()
+	BestVibratorButton:
+		text: "3 SECONDS"
+		size_hint: 1, None
+		height: "50dp"
+		on_release: app.vibratorController.run_vibrator(3), app.adsController.show_ads()
+	BestVibratorButton:
+		text: "5 SECONDS"
+		size_hint: 1, None
+		height: "50dp"
+		on_release: app.vibratorController.run_vibrator(5), app.adsController.show_ads()
+	BestVibratorButton:
+		text: "10 SECONDS"
+		size_hint: 1, None
+		height: "50dp"
+		on_release: app.vibratorController.run_vibrator(10), app.adsController.show_ads()
+		
+<BestVibratorAppCustomTimeView>:
+	orientation: "vertical"
+	spacing: "5dp"
+	padding: "5dp"
+	BestVibratorLabel:
+		text: "Choose the time you wish the device to vibrate."
+		color: 0,0,0,0.54
+		halign: "center"
+		font_size: "16dp"
+		size_hint: 1, 1
+		height: self.texture_size[1]
+		text_size: self.width, None
+		font_name: "fonts/Roboto-Regular.ttf"
+	BestVibratorLabel:
+		size_hint: 1, None
+		height: "30dp"
+		text: "Vibrations period: " + app.vibratorController.custom_vibrations_time(slider_custom_time.value)
+		color: 0,0,0,0.54
+	BestVibratorSlider:
+		id: slider_custom_time
+		max: 3600
+		min: 1
+		step: 1
+		value: 1
+		padding: "40dp"
+		size_hint: 1, None
+		height: "50dp"
+	BestVibratorButton:
+		text: "VIBRATE"
+		size_hint: 1, None
+		height: "50dp"
+		on_release: app.vibratorController.run_vibrator(slider_custom_time.value), app.adsController.show_ads()
+		
+<BestVibratorAppSchemaView>:
+	orientation: "vertical"
+	spacing: "5dp"
+	padding: "5dp"
+	BestVibratorLabel:
+		text: "Choose the vibration and gap times."
+		color: 0,0,0,0.54
+		halign: "center"
+		font_size: "16dp"
+		size_hint: 1, 1
+		height: self.texture_size[1]
+		text_size: self.width, None
+		font_name: "fonts/Roboto-Regular.ttf"
+	BestVibratorLabel:
+		size_hint: 1, None
+		height: "30dp"
+		text: "Vibration length: " + str(slider_time.value)+"s"
+		color: 0,0,0,0.54
+	BestVibratorSlider:
+		size_hint: 1, None
+		height: "50dp"
+		id: slider_time
+		max: 3
+		min: 0.01
+		step: 0.01
+		value: 0.01
+		padding: "40dp"
+	BestVibratorLabel:
+		size_hint: 1, None
+		height: "30dp"
+		text: "Gap length: " + str(slider_gap.value)+"s"
+		color: 0,0,0,0.54
+	BestVibratorSlider:
+		size_hint: 1, None
+		height: "50dp"
+		id: slider_gap
+		max: 3
+		min: 0.01
+		step: 0.01
+		value: 0.01
+		padding: "40dp"
+	BestVibratorButton:
+		size_hint: 1, None
+		height: "50dp"
+		text: "VIBRATE"
+		on_release: app.vibratorController.run_vibrator_schema(slider_time.value, slider_gap.value), app.adsController.show_ads()
+		
+<BestVibratorAppAboutView>:
+	orientation: "vertical"
+	spacing: "5dp"
+	padding: "5dp"
+	BestVibratorLabel:
+		size_hint: 1, 1
+		text: app.vibratorController.check_vibrator()
+		color: 0,0,0,0.54
+		font_size: "16dp"
+	BoxLayout:
+		orientation: "vertical"
+		padding: "15dp"
+		size_hint: 1,1
+		BestVibratorLabel:
+			text: "Application created by Rafal Kaczor using Kivy: Python-based framework for creating natural user interface multiplatform apps."
+			color: 0,0,0,0.54
+			halign: "left"
+			font_size: "14dp"
+			size_hint: 1, None
+			height: self.texture_size[1]
+			text_size: self.width, None
+			font_name: "fonts/Roboto-Regular.ttf"
+	BestVibratorButton:
+		text: "EMAIL TO DEVELOPER"
+		size_hint: 1, None
+		height: "50dp"
+		on_release: app.webController.send_email_to_dev()
+	BestVibratorButton:
+		text: "KIVY PROJECT"
+		size_hint: 1, None
+		height: "50dp"
+		on_release: app.webController.open_website("http://kivy.org")
+	BestVibratorButton:
+		text: "GITHUB REPOSITORY"
+		on_release: app.webController.open_website("https://github.com/rafalo1333/Best-Vibrator")
+		size_hint: 1, None
+		height: "50dp"
+	BestVibratorButton:
+		text: "RATE THE APP IN GOOGLE PLAY"
+		on_release: app.webController.open_website("https://play.google.com/store/apps/details?id=com.rkdev.bestvibrator")
+		size_hint: 1, None
+		height: "50dp"
+		
+<BestVibratorButton>:
+	background_normal: "atlas://images/BestVibratorAppAtlas.atlas/button_normal"
+	background_down: "atlas://images/BestVibratorAppAtlas.atlas/button_down"
+	font_name: "fonts/Roboto-Medium.ttf"
+	font_size: "12dp"
+	
+<BestVibratorLabel>:
+	font_size: "20dp"
+	font_name: "fonts/Roboto-Regular.ttf"
+	color: 0,0,0,0.54
+
+<-BestVibratorSlider>:
+	canvas:
+		Color:
+            rgb: 1, 1, 1
+		BorderImage:
+            border: (0, 18, 0, 18) if self.orientation == 'horizontal' else (18, 0, 18, 0)
+            pos: (self.x + self.padding, self.center_y - dp(18)) if self.orientation == 'horizontal' else (self.center_x - 18, self.y + self.padding)
+            size: (self.width - self.padding * 2, dp(36)) if self.orientation == 'horizontal' else (dp(36), self.height - self.padding * 2)
+            source: "atlas://data/images/defaulttheme/slider{}_background{}".format(self.orientation[0], '_disabled' if self.disabled else '')
+		Rectangle:
+			pos: (self.value_pos[0] - dp(12), self.center_y - dp(13)) if self.orientation == 'horizontal' else (self.center_x - dp(12), self.value_pos[1] - dp(12))
+			size: (dp(24), dp(24))
+			source: "atlas://images/BestVibratorAppAtlas.atlas/slider"
