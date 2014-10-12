@@ -29,7 +29,7 @@ source.exclude_dirs = tests, bin, excluded
 #version.filename = %(source.dir)s/main.py
 
 # (str) Application versioning (method 2)
-version = 1.0.3
+version = 1.0.4
 
 # (list) Application requirements
 requirements = kivy,plyer

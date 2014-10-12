@@ -210,21 +210,32 @@ BestVibratorAppMain:
 		size_hint: 1, None
 		height: "50dp"
 		on_release: app.webController.send_email_to_dev()
-	BestVibratorButton:
-		text: "KIVY PROJECT"
-		size_hint: 1, None
-		height: "50dp"
-		on_release: app.webController.open_website("http://kivy.org")
-	BestVibratorButton:
-		text: "GITHUB REPOSITORY"
-		on_release: app.webController.open_website("https://github.com/rafalo1333/Best-Vibrator")
-		size_hint: 1, None
-		height: "50dp"
+	BoxLayout:
+        size_hint: 1, None
+        height: "50dp"
+        orientation: "horizontal"
+        padding: "0dp"
+        spacing: "5dp"
+        BestVibratorButton:
+            text: "KIVY PROJECT"
+            size_hint: 1, None
+            height: "50dp"
+            on_release: app.webController.open_website("http://kivy.org")
+        BestVibratorButton:
+            text: "GITHUB REPOSITORY"
+            on_release: app.webController.open_website("https://github.com/rafalo1333/Best-Vibrator")
+            size_hint: 1, None
+            height: "50dp"
 	BestVibratorButton:
 		text: "RATE THE APP IN GOOGLE PLAY"
 		on_release: app.webController.open_website("https://play.google.com/store/apps/details?id=com.rkdev.bestvibrator")
 		size_hint: 1, None
 		height: "50dp"
+    BestVibratorButton:
+        text: "* * * AD-FREE VERSION * * *"
+        on_release: app.webController.open_website("https://play.google.com/store/apps/details?id=com.rkdev.bestvibratordonate")
+        size_hint: 1, None
+        height: "50dp"
 		
 <BestVibratorButton>:
 	background_normal: "atlas://images/BestVibratorAppAtlas.atlas/button_normal"
