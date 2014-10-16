@@ -126,6 +126,7 @@ class BestVibratorAppAdsController(object):
 			#~ self.AdBuddiz.setLogLevel(self.AdBuddizLogLevel.Error)
 			self.AdBuddiz.cacheAds(PythonActivity.mActivity)
 			self.WAS_AD_SHOWN=False
+			self.WAS_EXIT_AD_SHOWN=False
 	
 	def show_ads(self):
 		if platform=="android":
@@ -137,6 +138,11 @@ class BestVibratorAppAdsController(object):
 					return True
 				else:
 					return False
+					
+	def show_exit_ad(self):
+		if platform=="android":
+			self.AdBuddiz.showAd(PythonActivity.mActivity)
+			self.WAS_EXIT_AD_SHOWN=True
 	
 class BestVibratorApp(App):
 
@@ -150,15 +156,16 @@ class BestVibratorApp(App):
 	def on_start(self):
 		use_kivy_settings=False
 		EventLoop.window.bind(on_keyboard=self.hook_keyboard)
-		self.adsController.show_ads()
 		
 	def open_settings(self, *largs):
 		pass
 		
 	def hook_keyboard(self, window, key, *largs):
 		if key in [27, 1001]:
-			if not self.adsController.show_ads():
+			if self.adsController.WAS_EXIT_AD_SHOWN:
 				self.close_app()
+			else:
+				self.adsController.show_exit_ad()
 			return True
 		return False
 	

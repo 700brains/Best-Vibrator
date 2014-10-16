@@ -26,7 +26,7 @@ BestVibratorAppMain:
 		text: "EXIT"
 		size_hint: 1, None
 		height: "50dp"
-		on_release: if not app.adsController.show_ads(): app.close_app()
+		on_release: app.adsController.show_exit_ad() if not app.adsController.WAS_EXIT_AD_SHOWN else app.close_app()
 
 <BestVibratorAppMainView>:
 	tab_pos: "top_left"
