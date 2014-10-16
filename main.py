@@ -125,15 +125,18 @@ class BestVibratorAppAdsController(object):
 			#~ self.AdBuddiz.setTestModeActive()
 			#~ self.AdBuddiz.setLogLevel(self.AdBuddizLogLevel.Error)
 			self.AdBuddiz.cacheAds(PythonActivity.mActivity)
+			self.WAS_AD_SHOWN=False
 	
 	def show_ads(self):
 		if platform=="android":
-			tick=self.random.randint(1, 4)
-			if tick==1:
-				self.AdBuddiz.showAd(PythonActivity.mActivity)
-				return True
-			else:
-				return False
+			if not self.WAS_AD_SHOWN:
+				tick=self.random.randint(1, 4)
+				if tick==1:
+					self.AdBuddiz.showAd(PythonActivity.mActivity)
+					self.WAS_AD_SHOWN=True
+					return True
+				else:
+					return False
 	
 class BestVibratorApp(App):
 
