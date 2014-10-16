@@ -121,7 +121,7 @@ class BestVibratorAppAdsController(object):
 			self.random=random
 			self.AdBuddiz=autoclass("com.purplebrain.adbuddiz.sdk.AdBuddiz")
 			#~ self.AdBuddizLogLevel=autoclass("com.purplebrain.adbuddiz.sdk.AdBuddizLogLevel")
-			self.AdBuddiz.setPublisherKey("82ed36f7-f673-4cb0-b225-2689286f2754")
+			self.AdBuddiz.setPublisherKey("XXX")
 			#~ self.AdBuddiz.setTestModeActive()
 			#~ self.AdBuddiz.setLogLevel(self.AdBuddizLogLevel.Error)
 			self.AdBuddiz.cacheAds(PythonActivity.mActivity)
