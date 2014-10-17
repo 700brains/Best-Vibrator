@@ -127,17 +127,24 @@ class BestVibratorAppAdsController(object):
 			self.AdBuddiz.cacheAds(PythonActivity.mActivity)
 		self.WAS_AD_SHOWN=False
 		self.WAS_EXIT_AD_SHOWN=False
+		
+	def is_ready(self):
+		if platform=="android":
+			if self.AdBuddiz.isReadyToShowAd(PythonActivity.mActivity):
+				return True
+			else:
+				return False
+		else:
+			return False
 	
 	def show_ads(self):
 		if platform=="android":
 			if not self.WAS_AD_SHOWN:
-				tick=self.random.randint(1, 3)
-				if tick==1:
-					self.AdBuddiz.showAd(PythonActivity.mActivity)
-					self.WAS_AD_SHOWN=True
-					return True
-				else:
-					return False
+				if self.is_ready():
+					tick=self.random.randint(1, 3)
+					if tick==1:
+						self.AdBuddiz.showAd(PythonActivity.mActivity)
+						self.WAS_AD_SHOWN=True
 		else:
 			self.WAS_AD_SHOWN=True
 					
@@ -169,7 +176,10 @@ class BestVibratorApp(App):
 			if self.adsController.WAS_EXIT_AD_SHOWN:
 				self.close_app()
 			else:
-				self.adsController.show_exit_ad()
+				if self.adsController.is_ready():
+					self.adsController.show_exit_ad()
+				else:
+					self.close_app()
 			return True
 		return False
 	
